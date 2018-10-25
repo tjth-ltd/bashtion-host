@@ -15,8 +15,9 @@
 		}
 	],
 	"hosts": [{
-			"name": "web1.ipa.example",
+			"name": "web1",
 			"hostname": "web1.ipa.example",
+                        "sshuser": "ubuntu",
 			"port": "22",
 			"key": "~/.ssh/id_rsa",
 			"usergroups": [
@@ -27,8 +28,9 @@
 			]
 		},
 		{
-			"name": "web2.ipa.example",
+			"name": "web2",
 			"hostname": "web2.ipa.example",
+                        "sshuser": "ec2-user",
 			"port": "22",
 			"key": "~/.ssh/id_rsa",
 			"usergroups": [
@@ -39,12 +41,12 @@
 			]
 		},
 		{
-			"name": "db1.ipa.example",
+			"name": "db1",
 			"hostname": "db1.ipa.example",
+                        "sshuser": "root",
 			"port": "22",
 			"key": "~/.ssh/id_rsa",
 			"usergroups": [
-				"lnxadmins",
 				"dbadmins"
 			],
 			"hostgroups": [
@@ -53,8 +55,9 @@
 			]
 		},
 		{
-			"name": "db2.ipa.example",
+			"name": "db2",
 			"hostname": "db2.ipa.example",
+                        "sshuser": "tester",
 			"port": "22",
 			"key": "~/.ssh/id_rsa",
 			"usergroups": [
