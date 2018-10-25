@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+ ssh-bastion:
+  image: 'ssh-bastion:1.6'
+  tty: true
+  volumes:
+   - './scripts:/scripts/'
+   - './scripts/bashtion.sh:/etc/profile.d/bashtion.sh'
+   - './config:/etc/bashtion'
+  ports:
+   - '2201:2201'
+  network_mode: 'host'
