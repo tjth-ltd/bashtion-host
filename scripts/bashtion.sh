@@ -6,10 +6,10 @@ srvList="/tmp/server-list.txt"
 
 # Error if user not configured in Bashtion
 if grep $(whoami) $conf;then
-:
+	:
 else
-echo "User $(whoami) not configured in Bashtion"
-exit 1
+	echo "User $(whoami) not configured in Bashtion"
+	exit 1
 fi
 
 # Get User's Groups
@@ -17,10 +17,10 @@ groups=$(cat $conf | jq -r ".users[] | select(.username=="\"$(whoami)"\") | .use
 
 # Get servers in Groups
 for group in $groups; do
-cat $conf | jq -r ".hosts[] | select(.usergroups[]=="\"$group"\") | .name" >> $srvList
+	cat $conf | jq -r ".hosts[] | select(.usergroups[]=="\"$group"\") | .name" >> $srvList
 done
 
-# Format server list for Dialog
+# Format server list for Dialog (Duplicate text on each line)
 sed -i -r 's/(\S+)/\1 \1/g' $srvList
 list=$(cat $srvList)
 
@@ -35,14 +35,14 @@ choiceVal=$?
 # Proceed based on option selected
 case $choiceVal in
 	0)
-	user=$(cat $conf | jq -r ".hosts[] | select(.name=="\"$choice"\") | .sshuser")
-	echo "ssh $user@"$choice"";;
-  1)
-    echo "Cancel pressed.";;
-  255)
-    echo "ESC pressed.";;
+		user=$(cat $conf | jq -r ".hosts[] | select(.name=="\"$choice"\") | .sshuser")
+		echo "ssh $user@"$choice"";;
+	1)
+		echo "Cancel pressed.";;
+	255)
+		echo "ESC pressed.";;
 esac
 
+# Cleanup
 rm -rf /tmp/server-list.txt
-
-#exit
+exit

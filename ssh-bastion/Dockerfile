@@ -19,7 +19,7 @@ RUN echo > "/etc/legal"
 
 # Run bastion script on login
 RUN echo "Match Group *,!root" >> /etc/ssh/sshd_config
-RUN echo "ForceCommand /scripts/bashtion.sh"
+RUN echo "ForceCommand /scripts/sshwrapper.sh"
 
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd

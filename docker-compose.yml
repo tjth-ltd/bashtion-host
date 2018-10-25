@@ -2,13 +2,13 @@ version: '3'
 
 services:
  ssh-bastion:
-  image: 'ssh-bastion:1.8'
+  image: 'ssh-bastion:1.10'
   tty: true
   volumes:
    - './scripts:/scripts/'
-   - './scripts/bashtion.sh:/etc/profile.d/bashtion.sh'
+   - './scripts/sshwrapper.sh:/etc/profile.d/sshwrapper.sh'
    - './config:/etc/bashtion'
-   - '/var/log/bastion:/var/log/bastion'
+   - '/var/log/bastion/:/var/log/bastion/'
   ports:
    - '2201:2201'
   network_mode: 'host'

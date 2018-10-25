@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Variables
+user=$(whoami)
+logFile="$user-$(date +%F)"
+tmpDir="/tmp/"
+logDir="/var/log/bastion/"
+suffix=$(mktemp -u _XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+
+# Welcome message
+dialog --title "Welcome to The Harrison Bashtion Server" --clear \
+        --yesno "Your connection and sesion will be logged and audited. (Log file: $logFile) Do you accept?" 10 50
+
+case $? in
+        0)
+                dialog --infobox "Okay, go with caution.." 10 30 ; sleep 1
+		script -qf --timing="$tmpDir""$logFile""$suffix".timing "$logDir""$logFile""$suffix".log --command=/scripts/bashtion.sh
+                ;;
+        1)
+                dialog --infobox "So be it.." 10 30 ; sleep 1
+                exit 1
+                ;;
+        255)
+                echo "ESC pressed.";;
+		exit 1
+esac
+
