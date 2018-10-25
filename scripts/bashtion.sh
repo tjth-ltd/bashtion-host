@@ -5,10 +5,10 @@ conf="/etc/bashtion/bashtion.json"
 srvList="/tmp/server-list.txt"
 
 # Error if user not configured in Bashtion
-if [[ $conf == *"$(whoami)"* ]];then
+if grep $(whoami) $conf;then
 :
 else
-echo "User not configured in Bashtion"
+echo "User $(whoami) not configured in Bashtion"
 exit 1
 fi
 
@@ -29,4 +29,4 @@ choice=$(dialog --clear --backtitle "Server Connection" --title "Server List" --
 
 rm -rf /tmp/server-list.txt
 
-#exit
+exit
