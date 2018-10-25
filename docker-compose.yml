@@ -2,7 +2,7 @@ version: '3'
 
 services:
  ssh-bastion:
-  image: 'ssh-bastion:1.6'
+  image: 'ssh-bastion:1.8'
   tty: true
   volumes:
    - './scripts:/scripts/'

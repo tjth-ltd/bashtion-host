@@ -4,6 +4,14 @@
 conf="/etc/bashtion/bashtion.json"
 srvList="/tmp/server-list.txt"
 
+# Error if user not configured in Bashtion
+if [[ $conf == *"$(whoami)"* ]];then
+:
+else
+echo "User not configured in Bashtion"
+exit 1
+fi
+
 # Get User's Groups
 groups=$(cat $conf | jq -r ".users[] | select(.username=="\"$(whoami)"\") | .usergroups[]")
 
@@ -15,12 +23,10 @@ done
 # Format server list with numbers prepended
 list=$(nl -w1 -nrz $srvList)
 
-echo $list
-
 # Generate list
 choice=$(dialog --clear --backtitle "Server Connection" --title "Server List" --menu "Which Server would you like to connect to?" 15 40 4 \
         $list 2>&1 >/dev/tty)
 
 rm -rf /tmp/server-list.txt
 
-exit
+#exit
