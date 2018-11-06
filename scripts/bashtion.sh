@@ -4,14 +4,6 @@
 conf="/etc/bashtion/bashtion.json"
 srvList="/tmp/server-list.txt"
 
-# Error if user not configured in Bashtion
-#if grep $(whoami) $conf;then
-#	:
-#else
-#	echo "User $(whoami) not configured in Bashtion"
-#	exit 1
-#fi
-
 # Get User's Groups
 groups=$(cat $conf | jq -r ".users[] | select(.username=="\"$(whoami)"\") | .usergroups[]")
 
@@ -46,4 +38,4 @@ esac
 
 # Cleanup
 rm -rf /tmp/server-list.txt
-#exit
+exit
