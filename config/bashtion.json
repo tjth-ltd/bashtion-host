@@ -21,8 +21,8 @@
 		}
 	],
 	"hosts": [{
-			"name": "hvm-monit",
-			"hostname": "hvm-monit.harrison.lan",
+			"name": "web1",
+			"hostname": "web1.ipa.example",
                         "sshuser": "root",
 			"port": "22",
 			"key": "~/.ssh/id_rsa",
