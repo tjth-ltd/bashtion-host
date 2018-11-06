@@ -6,14 +6,15 @@ logFile="$user-$(date +%F)"
 tmpDir="/tmp/"
 logDir="/var/log/bastion/"
 suffix=$(mktemp -u XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+conf="/etc/bashtion/bashtion.json"
 
-# Error if user not configured in Bashtion
-#if grep $(whoami) $conf;then
-#        :
-#else
-#        echo "User $(whoami) not configured in Bashtion"
-#        exit 1
-#fi
+# Error and exit if user not configured in Bashtion
+if [[ $(cat /etc/bashtion/bashtion.json | jq -r ".users[] | select(.username=="\"$(whoami)"\")") == *"$(whoami)"* ]]; then
+        :
+else
+        echo "User $(whoami) not configured in Bashtion"
+        exit 1
+fi
 
 # Welcome message
 dialog --title "Welcome to The Harrison Bashtion Server" --clear \
