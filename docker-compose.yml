@@ -5,9 +5,10 @@ services:
   image: 'ssh-bastion:1.10'
   tty: true
   volumes:
-   - './scripts:/scripts/'
-   - './scripts/sshwrapper.sh:/etc/profile.d/sshwrapper.sh'
-   - './config:/etc/bashtion'
+   - './scripts/bashtion.sh:/scripts/bashtion.sh:ro'
+   - './scripts/add-user.sh:/scripts/add-user.sh:ro'
+   - './scripts/sshwrapper.sh:/etc/profile.d/sshwrapper.sh:ro'
+   - './config/bashtion.json:/etc/bashtion/bashtion.json:ro'
    - '/var/log/bastion/:/var/log/bastion/'
   ports:
    - '2201:2201'
