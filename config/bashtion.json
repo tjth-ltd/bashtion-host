@@ -3,7 +3,13 @@
 		"lnxadmins",
 		"dbadmins"
 	],
-	"users": [{
+	"users": [
+                {
+                        "username": "tim",
+                        "keyfile": "~/.ssh/id_rsa",
+                        "usergroups": ["lnxadmins"]
+                },
+		{
 			"username": "user1",
 			"keyfile": "~/.ssh/id_rsa",
 			"usergroups": ["lnxadmins"]
@@ -15,9 +21,9 @@
 		}
 	],
 	"hosts": [{
-			"name": "web1",
-			"hostname": "web1.ipa.example",
-                        "sshuser": "ubuntu",
+			"name": "hvm-monit",
+			"hostname": "hvm-monit.harrison.lan",
+                        "sshuser": "root",
 			"port": "22",
 			"key": "~/.ssh/id_rsa",
 			"usergroups": [

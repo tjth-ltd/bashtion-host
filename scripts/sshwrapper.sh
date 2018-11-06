@@ -5,7 +5,15 @@ user=$(whoami)
 logFile="$user-$(date +%F)"
 tmpDir="/tmp/"
 logDir="/var/log/bastion/"
-suffix=$(mktemp -u _XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+suffix=$(mktemp -u XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+
+# Error if user not configured in Bashtion
+#if grep $(whoami) $conf;then
+#        :
+#else
+#        echo "User $(whoami) not configured in Bashtion"
+#        exit 1
+#fi
 
 # Welcome message
 dialog --title "Welcome to The Harrison Bashtion Server" --clear \
@@ -21,7 +29,8 @@ case $? in
                 exit 1
                 ;;
         255)
-                echo "ESC pressed.";;
-		exit 1
+                echo "ESC pressed."
+		exit
+		;;
 esac
 
