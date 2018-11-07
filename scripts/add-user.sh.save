@@ -1,7 +1,5 @@
 #!/bin/bash
 
-siteAdmin=$(cat /etc/bashtion/bashtion.json | jq -r ".server[] | .siteadmin")
-
 echo "Enter the new username for the new user:"
   read user
   # Check to see if the user exists in htpasswd already
@@ -56,13 +54,9 @@ fi
   fi
 
 # Generate public ssh-key for new user
-ssh-keygen -t rsa -f /home/"$user"/.ssh/id_rsa -q -N ""
+ssh-keygen -t rsa -f /home/"$user"/.ssh/id_rsa.pub -q -N ""
 chmod 600 /home/"$user"/.ssh/id_rsa.pub
 chmod 755 /home/"$user"/.ssh/
-chown -R "$user":"$user" /home/"$user"/.ssh
-
-# Print public key for Administrator
-echo "pubic key for $user: $(cat /home/"$user"/.ssh/id_rsa.pub)"
 
 # Restrict command running
 chsh -s /bin/rbash $user
@@ -70,9 +64,8 @@ mkdir /home/"$user"/bin
 chmod 755 /home/"$user"/bin
 echo "PATH=/home/"$user"/bin" >> /home/"$user"/.bashrc
 echo "export PATH" >> /home/"$user"/.bashrc
-ln -s /bin/bashtion.sh /home/"$user"/bin
+ln -s /scripts/bashtion.sh /home/"$user"/bin
 ln -s /bin/ls /home/"$user"/bin
-ln -s /usr/bin/clear_console /home/"$user"/bin
 ln -s /bin/cd /home/"$user"/bin
 ln -s /bin/cat /home/"$user"/bin
 ln -s /scripts/sshwrapper.sh /home/"$user"/bin
