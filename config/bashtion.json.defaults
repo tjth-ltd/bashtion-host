@@ -1,4 +1,10 @@
 {
+	"server": [
+		{
+			"servername": "Bashtion Server Name",
+			"siteadmin": "admin@email.com"
+		}
+	],
 	"usergroups": [
 		"lnxadmins",
 		"dbadmins"

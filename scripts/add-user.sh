@@ -1,5 +1,7 @@
 #!/bin/bash
 
+siteAdmin=$(cat /etc/bashtion/bashtion.json | jq -r ".server[] | .siteadmin")
+
 echo "Enter the new username for the new user:"
   read user
   # Check to see if the user exists in htpasswd already
@@ -54,9 +56,18 @@ fi
   fi
 
 # Generate public ssh-key for new user
-ssh-keygen -t rsa -f /home/"$user"/.ssh/id_rsa.pub -q -N ""
+ssh-keygen -t rsa -f /home/"$user"/.ssh/id_rsa -q -N ""
 chmod 600 /home/"$user"/.ssh/id_rsa.pub
 chmod 755 /home/"$user"/.ssh/
+
+# Email admin public key
+   read -p "Would you like to email the site admin ("$siteAdmin") the public key(y/n)?" yn
+    case $yn in
+        # If yes, continue. Else, exit
+        [Yy]* ) echo "echo "New user public ssh key on Bashtion Server: $user - $pubkey" | mail -s "New user on Bashtion server" "$siteAdmin";;";;
+        [Nn]* ) echo "pubic key for $user: $(cat /home/"$user"/.ssh/id_rsa.pub)";;
+        * ) echo "Please answer yes or no.";;
+    esac
 
 # Restrict command running
 chsh -s /bin/rbash $user

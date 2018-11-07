@@ -1,5 +1,7 @@
 #!/bin/bash
 
+serverName=$(cat /etc/bashtion/bashtion.json | jq -r ".server[] | .servername")
+
 # Variables
 user=$(whoami)
 logFile="$user-$(date +%F)"
@@ -25,7 +27,7 @@ else
 fi
 
 # Welcome message
-dialog --title "Welcome to The Harrison Bashtion Server" --clear \
+dialog --title "Welcome to $serverName" --clear \
         --yesno "Your connection and sesion will be logged and audited. (Log file: $logFile) Do you accept?" 10 50
 
 case $? in

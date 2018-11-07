@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
-# Install Openssh-server and configure (Also install Dialog for Menu and jq for Json parsing)
-RUN apt-get update && apt-get install -y openssh-server dialog jq
+# Install Openssh-server and configure (Also install Dialog for Menu and jq for Json parsing, sendmail for admin emails)
+RUN apt-get update && apt-get install -y openssh-server dialog jq sendmail
 RUN mkdir /var/run/sshd
 # Set Root password
 RUN echo 'root:screencast' | chpasswd
