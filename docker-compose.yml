@@ -11,4 +11,4 @@ services:
    - '/var/log/bastion/:/var/log/bastion/'
   ports:
    - '2201:2201'
-#  network_mode: 'host'
+  network_mode: 'host'
