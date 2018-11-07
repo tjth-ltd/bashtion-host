@@ -15,8 +15,23 @@ echo "Enter the new username for the new user:"
   else
     :
   fi
-echo "Now the password (Less than 8 characters)?"
-  read passwd
+  read -p "Would you like to use Password authentication (Otherwise, public SSH key will be required) (y/n)?" ynp
+    case $ynp in
+        # If yes, continue. Else, exit
+        [Yy]* ) pass="yes";;
+        [Nn]* ) pass="no";;
+        * ) echo "Please answer yes or no.";;
+    esac
+
+if [[ $pass = "yes" ]];then
+	echo "Now the password (Less than 8 characters)?"
+	read passwd
+else
+	# Randomly Generate password (50 Characters)
+	passwd=$(date +%s | sha256sum | base64 | head -c 50 ; echo)
+	echo "Please enter the user's public SSH key"
+	read pubkey
+fi
 
 # Create the User
   echo "Now creating the User"
@@ -26,6 +41,20 @@ echo "Now the password (Less than 8 characters)?"
   fi
 # Set the password
   echo "$user:$passwd" | chpasswd
+# If Public ssh key was chosen, create authorized_keys file
+  if [[ $pass = "no"  ]];then
+	mkdir /home/"$user"/.ssh
+	echo "$pubkey" >> /home/"$user"/.ssh/authorized_keys
+	chmod 755 /home/"$user"/.ssh/
+	chmod 644 /home/"$user"/.ssh/authorized_keys
+  else
+	:
+  fi
+
+# Generate public ssh-key for new user
+ssh-keygen -t rsa -f /home/"$user"/.ssh/id_rsa.pub
+chmod 600 /home/"$user"/.ssh/id_rsa.pub
+
 # Restrict command running
 chsh -s /bin/rbash $user
 mkdir /home/"$user"/bin

@@ -11,6 +11,7 @@ conf="/etc/bashtion/bashtion.json"
 # Error if config file does not exist
 if [[ ! -f "$conf"  ]];then
 	echo "Bashtion is not configured"
+	exit 1
 else
 	:
 fi
