@@ -10,6 +10,7 @@ services:
    - './scripts/sshwrapper.sh:/etc/profile.d/sshwrapper.sh:ro'
    - './config/bashtion.json:/etc/bashtion/bashtion.json:ro'
    - '/var/log/bastion/:/var/log/bastion/'
+   - '/opt/bashtion-users/:/home/'
   ports:
    - '2201:2201'
   network_mode: 'host'

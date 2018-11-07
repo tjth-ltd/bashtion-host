@@ -3,7 +3,7 @@
 echo "Enter the new username for the new user:"
   read user
   # Check to see if the user exists in htpasswd already
-  if [[ $(cat /etc/passwd) == *"$user":* ]];then
+  if [[ -d /home/"$user" ]];then
     exists="yes"
     read -p "This user already exists, would you like to update their password (y/n)?" yn
     case $yn in
@@ -41,19 +41,22 @@ fi
   fi
 # Set the password
   echo "$user:$passwd" | chpasswd
+# Create .ssh directory
+  mkdir /home/"$user"/.ssh
+  chmod 755 /home/"$user"/.ssh/
+
 # If Public ssh key was chosen, create authorized_keys file
   if [[ $pass = "no"  ]];then
-	mkdir /home/"$user"/.ssh
 	echo "$pubkey" >> /home/"$user"/.ssh/authorized_keys
-	chmod 755 /home/"$user"/.ssh/
 	chmod 644 /home/"$user"/.ssh/authorized_keys
   else
 	:
   fi
 
 # Generate public ssh-key for new user
-ssh-keygen -t rsa -f /home/"$user"/.ssh/id_rsa.pub
+ssh-keygen -t rsa -f /home/"$user"/.ssh/id_rsa.pub -q -N ""
 chmod 600 /home/"$user"/.ssh/id_rsa.pub
+chmod 755 /home/"$user"/.ssh/
 
 # Restrict command running
 chsh -s /bin/rbash $user
