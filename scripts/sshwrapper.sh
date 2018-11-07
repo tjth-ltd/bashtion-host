@@ -23,7 +23,7 @@ dialog --title "Welcome to The Harrison Bashtion Server" --clear \
 case $? in
         0)
                 dialog --infobox "Okay, go with caution.." 10 30 ; sleep 1
-		script -qf --timing="$tmpDir""$logFile""$suffix".timing "$logDir""$logFile""$suffix".log --command=/scripts/bashtion.sh
+		script -qf --timing="$tmpDir""$logFile""$suffix".timing "$logDir""$logFile""$suffix".log --command=bashtion.sh
                 ;;
         1)
                 dialog --infobox "So be it.." 10 30 ; sleep 1
