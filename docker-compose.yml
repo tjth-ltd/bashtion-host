@@ -9,8 +9,8 @@ services:
    - './scripts/add-user.sh:/scripts/add-user.sh:ro'
    - './scripts/sshwrapper.sh:/etc/profile.d/sshwrapper.sh:ro'
    - './config/bashtion.json:/etc/bashtion/bashtion.json:ro'
-   - '/var/log/bastion/:/var/log/bastion/'
-   - '/opt/bashtion-users/:/home/'
+   - './logs/:/var/log/bastion/'
+   - './homedirs/:/home/'
   ports:
    - '2201:2201'
   network_mode: 'host'
