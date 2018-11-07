@@ -5,7 +5,8 @@ services:
   image: 'ssh-bastion:1.10'
   tty: true
   volumes:
-   - './scripts/bashtion.sh:/scripts/bashtion.sh:ro'
+#   - './scripts/bashtion.sh:/scripts/bashtion.sh:ro'
+   - './scripts/bashtion.sh:/bin/bashtion.sh:ro'
    - './scripts/add-user.sh:/scripts/add-user.sh:ro'
    - './scripts/sshwrapper.sh:/etc/profile.d/sshwrapper.sh:ro'
    - './config/bashtion.json:/etc/bashtion/bashtion.json:ro'

@@ -64,7 +64,7 @@ mkdir /home/"$user"/bin
 chmod 755 /home/"$user"/bin
 echo "PATH=/home/"$user"/bin" >> /home/"$user"/.bashrc
 echo "export PATH" >> /home/"$user"/.bashrc
-ln -s /scripts/bashtion.sh /home/"$user"/bin
+ln -s /bin/bashtion.sh /home/"$user"/bin
 ln -s /bin/ls /home/"$user"/bin
 ln -s /bin/cd /home/"$user"/bin
 ln -s /bin/cat /home/"$user"/bin
