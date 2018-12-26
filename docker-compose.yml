@@ -2,10 +2,9 @@ version: '3'
 
 services:
  ssh-bastion:
-  image: 'ssh-bastion:1.11'
+  build: .
   tty: true
   volumes:
-#   - './scripts/bashtion.sh:/scripts/bashtion.sh:ro'
    - './scripts/bashtion.sh:/bin/bashtion.sh:ro'
    - './scripts/add-user.sh:/scripts/add-user.sh:ro'
    - './scripts/sshwrapper.sh:/etc/profile.d/sshwrapper.sh:ro'
@@ -14,4 +13,3 @@ services:
    - './homedirs/:/home/'
   ports:
    - '2201:2201'
-  network_mode: 'host'
