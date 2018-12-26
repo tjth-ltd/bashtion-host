@@ -15,4 +15,8 @@ docker-compose up -d --build
 * Update users with appropriate user names for your users
 * Update hosts with your server names / IPs should be used in hostname field if DNS is not configured completely
 
+# Logging
+* Logging is set to mount to the host, you can adjust the mounted directory in the docker-compose.yml file
+* A random string is added to the end of the logfile name to ensure this cannot be guessed on the host system
+
 NOTE: This is still a WIP - Be kind!
