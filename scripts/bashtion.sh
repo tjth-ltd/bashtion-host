@@ -2,7 +2,8 @@
 
 # Variables
 conf="/etc/bashtion/bashtion.json"
-srvList="/tmp/server-list.txt"
+suffix=$(mktemp -u XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+srvList="/tmp/server-list-$suffix.txt"
 
 # Get User's Groups
 groups=$(cat $conf | jq -r ".users[] | select(.username=="\"$(whoami)"\") | .usergroups[]")
@@ -29,7 +30,8 @@ case $choiceVal in
 	0)
 		user=$(cat $conf | jq -r ".hosts[] | select(.name=="\"$choice"\") | .sshuser")
 		clear
-		ssh $user@"$choice";;
+		ssh $user@"$choice"
+		;;
 	1)
 		echo "Cancel pressed.";;
 	255)

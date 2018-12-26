@@ -65,7 +65,6 @@ chown -R "$user":"$user" /home/"$user"/.ssh
 echo "pubic key for $user: $(cat /home/"$user"/.ssh/id_rsa.pub)"
 
 # Restrict command running
-chsh -s /bin/rbash $user
 mkdir /home/"$user"/bin
 chmod 755 /home/"$user"/bin
 echo "PATH=/home/"$user"/bin" >> /home/"$user"/.bashrc
@@ -74,5 +73,9 @@ ln -s /bin/bashtion.sh /home/"$user"/bin
 ln -s /bin/ls /home/"$user"/bin
 ln -s /usr/bin/clear_console /home/"$user"/bin
 ln -s /bin/cd /home/"$user"/bin
+ln -s /bin/ps /home/"$user"/bin ## TEMP
+ln -s /bin/grep /home/"$user"/bin ## TEMP
 ln -s /bin/cat /home/"$user"/bin
 ln -s /scripts/sshwrapper.sh /home/"$user"/bin
+chsh -s /bin/rbash $user
+#chsh -s /scripts/sshwrapper.sh $user

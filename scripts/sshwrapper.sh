@@ -10,19 +10,21 @@ logDir="/var/log/bastion/"
 suffix=$(mktemp -u XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
 conf="/etc/bashtion/bashtion.json"
 
+
 # Error if config file does not exist
 if [[ ! -f "$conf"  ]];then
 	echo "Bashtion is not configured"
 	exit 1
 else
-	:
+	# Block Ctrl+C + Ctrl+Z
+	trap '' INT TSTP
 fi
 
 # Error and exit if user not configured in Bashtion
 if [[ $(cat "$conf" | jq -r ".users[] | select(.username=="\"$(whoami)"\")") == *"$(whoami)"* ]]; then
         :
 else
-        echo "User $(whoami) not configured in Bashtion"
+        echo "User $(whoami) not configured in $serverName Bashtion"
         exit 1
 fi
 
@@ -45,3 +47,15 @@ case $? in
 		;;
 esac
 
+## Ensure Bashtion is always running
+while :
+do
+	if pgrep -x "/bin/bashtion.sh" > /dev/null
+	then
+		# Do nothing
+		:
+	else
+		# Restart Bashtion
+		bashtion.sh
+	fi
+done
