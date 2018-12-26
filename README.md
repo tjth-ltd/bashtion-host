@@ -29,6 +29,13 @@ docker exec -it bashtionhost_ssh-bastion_1 /scripts/add-user.sh
 ```
 * Ensure the user is setup in the config file or they will recieve an error on login.
 
+# Connecting
+* By default the container listens on port 2201
+* It should be accessed via a normal SSH connection, eg:
+```
+ssh [username]@localhost -p 2201
+```
+
 # Logging
 * Logging is set to mount to the host, you can adjust the mounted directory in the docker-compose.yml file
 * A random string is added to the end of the logfile name to ensure this cannot be guessed on the host system
