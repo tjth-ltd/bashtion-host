@@ -9,7 +9,7 @@ NOTE: This is still a WIP - Be kind! This is not to be used in a production envi
 * Retain users after server restarts *WIP*
 
 # Installation
-* Clone the repository to your Bashtion server
+* Clone the repository to your Docker host
 * Build the container:
 ```
 docker-compose up -d --build
@@ -25,7 +25,7 @@ docker-compose up -d --build
 # Adding Users
 * Run the below command to create a user within the container. Follow prompts to create users
 ```
-docker exec -it bashtionhost_ssh-bastion_1 /scripts/add-user.sh
+docker exec -it bashtion-server /scripts/add-user.sh
 ```
 * Ensure the user is setup in the config file or they will recieve an error on login.
 

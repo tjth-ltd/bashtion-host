@@ -3,6 +3,7 @@ version: '3'
 services:
  ssh-bastion:
   build: .
+  container_name: bashtion-server
   tty: true
   volumes:
    - './scripts/bashtion.sh:/bin/bashtion.sh:ro'
