@@ -46,3 +46,4 @@ ssh [username]@localhost -p 2201
 * Retain password connecting users over container restarts (Or drop password connections.. To be decided)
 * Setup scp functionality (Sending files via Bashtion to remote hosts).
 * Integration with ansible for distributed commands.
+* Two factor authentication
